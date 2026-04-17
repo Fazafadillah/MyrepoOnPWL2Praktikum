@@ -18,10 +18,16 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $table = 'users';
     protected $fillable = [
-        'name',
+        'npm',
+        'username',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -46,4 +52,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function loans()
+    {
+        return $this->hasMany(Loan::class, 'user_npm', 'npm');
+    }
+
 }
